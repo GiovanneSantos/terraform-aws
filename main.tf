@@ -1,3 +1,7 @@
+variable "PUBLIC_KEY" {
+  type = string
+}
+
 provider "aws" {
   region  = "us-east-2"
   profile = "default"
@@ -5,7 +9,7 @@ provider "aws" {
 
 resource "aws_key_pair" "chave_ssh" {
   key_name   = "key_aws"
-  public_key = file("C:/Users/Giovanne/.ssh/id_rsa.pub") # Ou caminho para sua chave pública
+  public_key = file(var.PUBLIC_KEY)
 }
 
 resource "aws_security_group" "acesso_ssh" {

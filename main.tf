@@ -9,7 +9,7 @@ provider "aws" {
 
 resource "aws_key_pair" "chave_ssh" {
   key_name   = "key_aws"
-  public_key = file(var.PUBLIC_KEY)
+  public_key = file(var.PUBLIC_KEY) #Não enviar segredos para o git
 }
 
 resource "aws_security_group" "acesso_ssh" {

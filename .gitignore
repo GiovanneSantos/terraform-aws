@@ -1,0 +1,33 @@
+# Diretórios e arquivos criados pelo Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+crash.log
+
+# Arquivos de variáveis sensíveis
+*.tfvars
+*.tfvars.json
+
+# Arquivos de override locais
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Arquivos do plano do Terraform
+*.plan
+
+# Diretórios e arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de log e cache
+*.log
+*.bak
+
+# Outros
+*.swp
+*.tmp
+.terraform/
+*.env

@@ -53,5 +53,10 @@ usermod -aG docker devops
 curl -L "https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
+#Instalando o Ansible
+python3 -m pip install --upgrade pip
+python3 -m pip install ansible
+
+
 #configuração de diretórios
 mkdir -p ~/monitoring ~/apis ~/cronjobs

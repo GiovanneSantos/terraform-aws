@@ -60,10 +60,10 @@ apt-get install -y \
   fail2ban logrotate sysstat ncdu iotop \
   default-jdk silversearcher-ag ufw || true
 
-ufw default deny incoming
-ufw default allow outgoing
-ufw allow OpenSSH
-ufw --force enable
+# ufw default deny incoming
+# ufw default allow outgoing
+# ufw allow OpenSSH
+# ufw --force enable
 
 mkdir -p /home/devops/monitoring /home/devops/apis /home/devops/cronjobs
 chown -R devops:devops /home/devops

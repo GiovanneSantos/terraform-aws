@@ -20,7 +20,7 @@ resource "aws_security_group" "acesso_ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Pode restringir à sua rede depois
+    cidr_blocks = ["0.0.0.0/0"] 
   }
 
   egress {
@@ -32,16 +32,16 @@ resource "aws_security_group" "acesso_ssh" {
 }
 
 resource "aws_instance" "local" {
-    ami           = "ami-04308cf1267e3183c"
-    instance_type = "t2.micro"
-    key_name      = aws_key_pair.chave_ssh.key_name
-    vpc_security_group_ids = [aws_security_group.acesso_ssh.id]
+  ami                    = "ami-04308cf1267e3183c" # Confirme AMI Debian em us-east-2
+  instance_type          = "t2.micro"
+  key_name               = aws_key_pair.chave_ssh.key_name
+  vpc_security_group_ids = [aws_security_group.acesso_ssh.id]
 
-    user_data = templatefile("${path.module}/setup.sh.tpl", {
-        public_key = file(var.PUBLIC_KEY)
-    })
+  user_data = templatefile("${path.module}/setup.sh.tpl", {
+    public_key = file(var.PUBLIC_KEY)
+  })
 
-    tags = {
-        Name = "HomeLab-Debian"
-    }
+  tags = {
+    Name = "HomeLab-Debian"
+  }
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"         // <- necessário para http.HandlerFunc
 	"net/http/httptest"
 	"testing"
 )

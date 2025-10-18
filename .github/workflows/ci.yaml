@@ -41,8 +41,10 @@ jobs:
       - name: Log in to AWS ECR
         uses: aws-actions/amazon-ecr-login@v2
         with:
-          region: us-east-2                 # ajuste para sua região
-          # AWS_ACCESS_KEY_ID e AWS_SECRET_ACCESS_KEY devem estar nos secrets do repo
+            region: us-east-2
+            access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
 
       - name: Build Docker image
         run: |

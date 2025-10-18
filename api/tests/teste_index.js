@@ -12,7 +12,7 @@ const req = http.request(options, res => {
   res.on('data', chunk => data += chunk);
   res.on('end', () => {
     if (data === 'Hello Node API!') {
-      console.log('✅ Test passed');
+      console.log('Test passed');
     } else {
       console.error('Test failed:', data);
       process.exit(1);

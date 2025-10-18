@@ -1,4 +1,4 @@
-name: Node CI - Simple Test
+name: Node CI/CD
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,26 +25,30 @@ jobs:
 
       - name: Start API and run test
         run: |
-          npm start &                # inicia a API em background
-          npx wait-on http://localhost:8080
-          node tests/teste_index.js  # roda o seu teste
+          npm start &                        # inicia a API em background
+          npx wait-on http://localhost:8080  # espera a API estar pronta
+          node tests/teste_index.js           # roda o teste
         working-directory: ./api
-   
-    docker-build-and-push:
-      needs: build-and-test
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout repo
-          uses: actions/checkout@v3
 
-        - name: Log in to AWS ECR
-          uses: aws-actions/amazon-ecr-login@v2
+  docker-build-and-push:
+    needs: build-and-test
+    runs-on: ubuntu-latest
 
-        - name: Build Docker image
-          run: |
-            docker build -t my-app:${{ github.sha }} ./api
-            docker tag my-app:${{ github.sha }} 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab:${{ github.sha }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-        - name: Push Docker image to ECR
-          run: |
-            docker push 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab:${{ github.sha }}
+      - name: Log in to AWS ECR
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          region: us-east-2                 # ajuste para sua região
+          # AWS_ACCESS_KEY_ID e AWS_SECRET_ACCESS_KEY devem estar nos secrets do repo
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-app:${{ github.sha }} ./api
+          docker tag my-app:${{ github.sha }} 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab:${{ github.sha }}
+
+      - name: Push Docker image to ECR
+        run: |
+          docker push 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab:${{ github.sha }}

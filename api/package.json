@@ -2,12 +2,14 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "indes.js",
+  "main": "index.js",
+  "type": "module",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "node tests/teste_index.js"
   },
   "keywords": [],
   "author": "",

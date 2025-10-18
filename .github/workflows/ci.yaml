@@ -1,4 +1,4 @@
-name: Go CI
+name: Node CI
 
 on: 
   push:
@@ -24,7 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
-      run: npm install
+      run: cd api && npm install
 
     - name: Run tests
-      run: npm test
+      run: cd api && node tests/teste_index.js

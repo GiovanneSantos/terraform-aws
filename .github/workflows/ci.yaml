@@ -25,7 +25,5 @@ jobs:
 
       - name: Start API and run test
         run: |
-          npm start &                # inicia a API em background
-          npx wait-on http://localhost:8080
-          node tests/teste_index.js  # roda o seu teste
+          cd api && node index.js && node /tests/teste_indes.js
         working-directory: ./api

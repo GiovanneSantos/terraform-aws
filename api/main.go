@@ -3,11 +3,13 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"github.com/GiovanneSantos/terraform-aws/api"
 )
 
 func main() {
-	http.HandleFunc("/", api.HelloHandler)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Hello, GO API!"))
+	})
+
 	fmt.Println("Server starting on port 8080...")
 	http.ListenAndServe(":8080", nil)
 }

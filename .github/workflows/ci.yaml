@@ -29,3 +29,22 @@ jobs:
           npx wait-on http://localhost:8080
           node tests/teste_index.js  # roda o seu teste
         working-directory: ./api
+   
+    docker-build-and-push:
+      needs: build-and-test
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repo
+          uses: actions/checkout@v3
+
+        - name: Log in to AWS ECR
+          uses: aws-actions/amazon-ecr-login@v2
+
+        - name: Build Docker image
+          run: |
+            docker build -t my-app:${{ github.sha }} ./api
+            docker tag my-app:${{ github.sha }} 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab
+
+        - name: Push Docker image to ECR
+          run: |
+            docker push 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab

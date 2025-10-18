@@ -22,5 +22,5 @@ jobs:
     - name: Run tests
       run: |
         cd api
-        go mod init temp || true
+        go mod init || true
         go test ./tests/... -v

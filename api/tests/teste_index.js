@@ -11,7 +11,7 @@ const req = http.request(options, res => {
   let data = '';
   res.on('data', chunk => data += chunk);
   res.on('end', () => {
-    if (data === 'API running') {  // agora bate com a resposta da sua API
+    if (data === 'API running') {
       console.log('Test passed');
     } else {
       console.error('Test failed:', data);

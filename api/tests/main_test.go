@@ -1,4 +1,4 @@
-package main_test  // diferente de main
+package api_test  // diferente de main
 
 import (
 	"net/http/httptest"

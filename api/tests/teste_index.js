@@ -1,6 +1,5 @@
 import http from "http";
 
-// Testa se a API responde "Hello Node API!"
 const options = {
   hostname: 'localhost',
   port: 8080,
@@ -15,14 +14,14 @@ const req = http.request(options, res => {
     if (data === 'Hello Node API!') {
       console.log('✅ Test passed');
     } else {
-      console.error('❌ Test failed:', data);
+      console.error('Test failed:', data);
       process.exit(1);
     }
   });
 });
 
 req.on('error', err => {
-  console.error('❌ Test failed:', err);
+  console.error('Test failed:', err);
   process.exit(1);
 });
 

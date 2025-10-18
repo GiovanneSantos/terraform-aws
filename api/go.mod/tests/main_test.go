@@ -15,11 +15,11 @@ func TestHelloHandler(t *testing.T) {
 	res := rec.Result()
 	defer res.Body.Close()
 
-	// if res.StatusCode != http.StatusOK {
-	// 	t.Errorf("expected status 200, got %d", res.StatusCode)
-	// }
+	if res.StatusCode != http.StatusOK {
+		t.Errorf("expected status 200, got %d", res.StatusCode)
+	}
 
-	expectedBody := "Hello, WRONG!"
+	expectedBody := "Hello, GO API!"
 	buf := make([]byte, len(expectedBody))
 	res.Body.Read(buf)
 

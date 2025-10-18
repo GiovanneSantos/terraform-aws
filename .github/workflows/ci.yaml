@@ -8,10 +8,10 @@ on:
 
 jobs:
   test:
-    runs-on: ubunto-latest
+    runs-on: ubuntu-latest
 
     steps:
-    - name: checkout repository
+    - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Set up Go
@@ -22,5 +22,5 @@ jobs:
     - name: Run tests
       run: |
         cd api
-        go mode init temp || true
+        go mod init temp || true
         go test ./tests/... -v

@@ -19,7 +19,7 @@ func TestHelloHandler(t *testing.T) {
 		t.Errorf("expected status 200, got %d", res.StatusCode)
 	}
 
-	expectedBody := "Hello, GO API!"
+	expectedBody := "Hello, WRONG!"
 	buf := make([]byte, len(expectedBody))
 	res.Body.Read(buf)
 

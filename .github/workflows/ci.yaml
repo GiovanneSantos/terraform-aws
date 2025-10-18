@@ -43,8 +43,8 @@ jobs:
         - name: Build Docker image
           run: |
             docker build -t my-app:${{ github.sha }} ./api
-            docker tag my-app:${{ github.sha }} 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab
+            docker tag my-app:${{ github.sha }} 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab:${{ github.sha }}
 
         - name: Push Docker image to ECR
           run: |
-            docker push 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab
+            docker push 127854692881.dkr.ecr.us-east-2.amazonaws.com/homelab:${{ github.sha }}

@@ -1,13 +1,13 @@
-name: Node CI
+name: Node CI - Test
 
-on: 
+on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -15,28 +15,18 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./api
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./api
 
-    - name: Start API in background
-      run: npm start &
-      working-directory: ./api
-
-    - name: Wait for API to be ready
-      run: npx wait-on http://localhost:8080
-      working-directory: ./api
-
-    - name: Run tests
-      run: npm test
-      working-directory: ./api
+      - name: Run tests
+        run: npm test
+        working-directory: ./api
